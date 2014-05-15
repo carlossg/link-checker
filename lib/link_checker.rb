@@ -41,7 +41,7 @@ class LinkChecker
   def self.external_link_uri_strings(source)
     Nokogiri::HTML(source).css('a').select {|link|
         !link.attribute('href').nil? &&
-        link.attribute('href').value =~ /^https?\:\/\//
+        !(link.attribute('href').value =~ /^mailto/)
     }.map{|link| link.attributes['href'].value }
   end
 
